@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的GitHub仓库导航 - Stars & Forks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .category {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+        
+        .repo-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .repo-name {
+            font-weight: bold;
+            color: #2d3748;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        .repo-name:hover {
+            color: #667eea;
+        }
+        
+        .repo-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+        
+        .repo-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .fork-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .search-box {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .search-input {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            width: 300px;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            outline: none;
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 我的GitHub仓库导航</h1>
+            <p>精心整理的Stars和Forks项目集合</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number">237+</span>
+                <span>Fork项目</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">15+</span>
+                <span>分类</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span>开源</span>
+            </div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索项目..." id="searchInput">
+        </div>
+        
+        <div class="categories" id="categoriesContainer">
+            <!-- AI与机器学习 -->
+            <div class="category">
+                <h3>🤖 AI与机器学习</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/gpt_api_free" class="repo-name">gpt_api_free</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">免费ChatGPT API，支持GPT4 API，ChatGPT国内可用免费转发API，直连无需代理。极大降低接口使用成本。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 免费API</span>
+                        <span>🔧 ChatGPT</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/goog-app" class="repo-name">goog-app</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">在浏览器中运行LLM模型，使用MLC/WebLLM技术，无需服务器即可体验大语言模型。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 浏览器AI</span>
+                        <span>🔧 WebLLM</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/open-webui" class="repo-name">open-webui</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">用户友好的AI界面，支持Ollama、OpenAI API等多种AI服务，提供统一的聊天界面。</div>
+                    <div class="repo-meta">
+                        <span>⭐ AI界面</span>
+                        <span>🔧 Ollama</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 自动化与工作流 -->
+            <div class="category">
+                <h3>⚡ 自动化与工作流</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/n8n-workflows" class="repo-name">n8n-workflows</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">n8n工作流程集合，包含各种自动化场景的工作流模板，涵盖数据处理、API集成等。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 工作流</span>
+                        <span>🔧 n8n</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/huginn" class="repo-name">huginn</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">创建代理来监控和代表您行动。您的代理随时待命！强大的自动化监控工具。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 监控代理</span>
+                        <span>🔧 Ruby</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/documentation" class="repo-name">automa-documentation</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">Automa浏览器扩展的文档，用于浏览器自动化操作，支持网页数据抓取和自动化测试。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 浏览器自动化</span>
+                        <span>🔧 Chrome扩展</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据处理与爬虫 -->
+            <div class="category">
+                <h3>📊 数据处理与爬虫</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/firecrawl" class="repo-name">firecrawl</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">将整个网站转换为LLM就绪的markdown或结构化数据。通过单一API进行抓取、爬取和提取。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 网页爬虫</span>
+                        <span>🔧 API</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/ArchiveBox" class="repo-name">ArchiveBox</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">开源自托管网页归档工具。保存URL/浏览器历史/书签等，存储HTML、JS、PDF、媒体等内容。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 网页归档</span>
+                        <span>🔧 Python</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学习与教程 -->
+            <div class="category">
+                <h3>📚 学习与教程</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/30-Days-Of-Python" class="repo-name">30-Days-Of-Python</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">30天Python编程挑战，循序渐进学习Python编程语言的完整指南，适合初学者入门。</div>
+                    <div class="repo-meta">
+                        <span>⭐ Python教程</span>
+                        <span>🔧 学习资源</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/starred" class="repo-name">starred</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">GitHub热门项目个人收藏(1.5k+)，包含开发框架、组件、SDK、模板、API接口等各种项目。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 项目收藏</span>
+                        <span>🔧 资源整理</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 多媒体与创意 -->
+            <div class="category">
+                <h3>🎨 多媒体与创意</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/clapper" class="repo-name">clapper</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">Clapper.app，专为AI电影时代设计的视频合成器和序列器，创新的视频制作工具。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 视频制作</span>
+                        <span>🔧 AI视频</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/edge-tts" class="repo-name">edge-tts</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">使用Microsoft Edge的在线文本转语音服务，无需Microsoft Edge、Windows或API密钥。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 语音合成</span>
+                        <span>🔧 TTS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 生产力工具 -->
+            <div class="category">
+                <h3>🛠️ 生产力工具</h3>
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/MyBrain" class="repo-name">MyBrain</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">集任务、笔记、日历、日记和书签于一体的生产力应用和AI助手，全方位提升工作效率。</div>
+                    <div class="repo-meta">
+                        <span>⭐ 生产力</span>
+                        <span>🔧 AI助手</span>
+                    </div>
+                </div>
+                
+                <div class="repo-item">
+                    <a href="https://github.com/Poghappy/rssbud" class="repo-name">rssbud</a>
+                    <span class="fork-badge">Fork</span>
+                    <div class="repo-description">iOS/macOS的RSS订阅发现应用，与RSSHub配合使用效果特别好，App Store可下载。</div>
+                    <div class="repo-meta">
+                        <span>⭐ RSS阅读</span>
+                        <span>🔧 iOS/macOS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const categories = document.querySelectorAll('.category');
+            
+            categories.forEach(category => {
+                const repos = category.querySelectorAll('.repo-item');
+                let hasVisibleRepo = false;
+                
+                repos.forEach(repo => {
+                    const repoName = repo.querySelector('.repo-name').textContent.toLowerCase();
+                    const repoDesc = repo.querySelector('.repo-description').textContent.toLowerCase();
+                    
+                    if (repoName.includes(searchTerm) || repoDesc.includes(searchTerm)) {
+                        repo.style.display = 'block';
+                        hasVisibleRepo = true;
+                    } else {
+                        repo.style.display = 'none';
+                    }
+                });
+                
+                category.style.display = hasVisibleRepo ? 'block' : 'none';
+            });
+        });
+        
+        // 添加动画效果
+        window.addEventListener('load', function() {
+            const categories = document.querySelectorAll('.category');
+            categories.forEach((category, index) => {
+                setTimeout(() => {
+                    category.style.opacity = '0';
+                    category.style.transform = 'translateY(20px)';
+                    category.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        category.style.opacity = '1';
+                        category.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
